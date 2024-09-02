@@ -4,11 +4,11 @@ module RackCAS
     end
 
     def self.destroy_session_by_cas_ticket(cas_ticket)
-      affected = Session.find_by(cas_ticket: cas_ticket)
+      # affected = Session.find_by(cas_ticket: cas_ticket)
 
-      affected.destroy if affected.present?
+      # affected.destroy if affected.present?
 
-      affected == 1
+      # affected == 1
     end
 
     def self.prune(after = nil)
