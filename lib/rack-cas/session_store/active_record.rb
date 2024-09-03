@@ -4,11 +4,8 @@ module RackCAS
     end
 
     def self.destroy_session_by_cas_ticket(cas_ticket)
-      # affected = Session.find_by(cas_ticket: cas_ticket)
-
-      # affected.destroy if affected.present?
-
-      # affected == 1
+      affected = Session.where(cas_ticket: cas_ticket).delete_all
+      affected == 1
     end
 
     def self.prune(after = nil)
@@ -53,7 +50,9 @@ module RackCAS
 
     # Rack 2.0 method
     def delete_session(req, sid, options)
-      Session.where(session_id: sid).delete_all
+      sess = Session.find_by(session_id: sid)
+
+      sess.destroy if sess.present?
 
       options[:drop] ? nil : generate_sid
     end

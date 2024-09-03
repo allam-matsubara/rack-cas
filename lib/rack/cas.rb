@@ -45,7 +45,7 @@ class Rack::CAS
     if cas_request.single_sign_out? && RackCAS.config.session_store?
       log env, 'rack-cas: Intercepting single-sign-out request.'
 
-      RackCAS.config.session_store.destroy_session_by_cas_ticket(cas_request.ticket)
+      # RackCAS.config.session_store.destroy_session_by_cas_ticket(cas_request.ticket)
       return [200, {'Content-Type' => 'text/plain'}, ['CAS Single-Sign-Out request intercepted.']]
     end
 
